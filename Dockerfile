@@ -21,7 +21,8 @@ RUN apt-get update && \
     git \
     gitstats \
     rpl \
-    unzip
+    unzip \
+    openssh-client
 
 # Download and unarchive maven
 RUN wget --no-verbose -O /tmp/apache-maven-${MAVEN_VERSION}.tar.gz http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
