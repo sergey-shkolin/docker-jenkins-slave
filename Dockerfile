@@ -22,7 +22,8 @@ RUN apt-get update && \
     gitstats \
     rpl \
     unzip \
-    openssh-client
+    openssh-client \
+    iproute2
 
 # Download and unarchive maven
 RUN wget --no-verbose -O /tmp/apache-maven-${MAVEN_VERSION}.tar.gz http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
@@ -71,8 +72,9 @@ RUN groupadd jenkins && \
     useradd -d /home/jenkins -s /bin/bash -m jenkins -g jenkins
 
 # Swarm client
-RUN wget -O /home/jenkins/swarm-client.jar http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}.jar
+RUN wget -O /home/jenkins/swarm-client.jar http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_VERSION}/swarm-client-${SWARM_VERSION}-jar-with-dependencies.jar
 
 ADD jenkins-slave-run.sh /
 
 CMD ["/jenkins-slave-run.sh"]
+
