@@ -2,7 +2,6 @@
 
 set -x
 
-HOST_IP=$(ip route | awk '$1 == "default" {print $3}')
 JENKINS_SERVER=${JENKINS_SERVER:-$HOST_IP}
 JENKINS_PORT=${JENKINS_PORT:-8080}
 JENKINS_LABELS=${JENKINS_LABELS:-swarm}
