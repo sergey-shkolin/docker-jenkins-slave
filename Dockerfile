@@ -8,7 +8,8 @@ ENV SWARM_VERSION=2.2 \
     JAVA_PACKAGE=jdk \
     JAVA_HOME=/opt/jdk \
     PATH=${PATH}:/opt/jdk/bin \
-    MAVEN_HOME=/opt/maven
+    MAVEN_HOME=/opt/maven \
+    GRADLE_VERSION=3.4.1
 
 # Additional packages    
 RUN apt-get update && \
@@ -31,6 +32,13 @@ RUN wget --no-verbose -O /tmp/apache-maven-${MAVEN_VERSION}.tar.gz http://archiv
     && ln -s /opt/apache-maven-3.3.9 /opt/maven \
     && ln -s /opt/maven/bin/mvn /usr/local/bin \
     && rm -f /tmp/apache-maven-3.3.9.tar.gz
+
+# Download and unarchive gradle
+RUN curl -L https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-all.zip > /usr/share/gradle-$GRADLE_VERSION-all.zip \
+    && unzip -d /usr/share/ /usr/share/gradle-$GRADLE_VERSION-all.zip \
+    && ln -s /usr/share/gradle-$GRADLE_VERSION /usr/share/gradle \
+    && rm /usr/share/gradle-$GRADLE_VERSION-all.zip \
+    && ln -s /usr/share/gradle/bin/gradle /usr/bin/gradle
 
 # Download and unarchive Java
 RUN curl -kLOH "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
